@@ -78,6 +78,15 @@ class MinHeap
 
 
 
+    public void swap(int firstElement, int secondElement)
+    {
+        int temp = heap[firstElement];
+        heap[firstElement] = heap[secondElement];
+        heap[secondElement] = temp;
+    }
+
+
+
     public void insert(int inElement)
     {
         if (size == maxSize)
@@ -93,10 +102,7 @@ class MinHeap
 
         while (currentIndex > 0 && heap[getParent(currentIndex)] > heap[currentIndex])
         {
-            int temp = heap[getParent(currentIndex)];
-            heap[getParent(currentIndex)] = heap[currentIndex];
-            heap[currentIndex] = temp;
-
+            swap(getParent(currentIndex), currentIndex);
             currentIndex = getParent(currentIndex);
         }
     }
