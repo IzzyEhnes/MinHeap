@@ -109,6 +109,58 @@ class MinHeap
 
 
 
+    public void delete(int inIndex)
+    {
+        heap[inIndex] = heap[0];
+        int currentIndex = inIndex;
+
+        while (currentIndex > 0 && heap[getParent(currentIndex)] > heap[currentIndex])
+        {
+            swap(getParent(currentIndex), currentIndex);
+            currentIndex = getParent(currentIndex);
+        }
+
+        int currentSize = size;
+        int lastElement = heap[currentSize - 1];
+
+        heap[0] = lastElement;
+        size--;
+        makeMinHeap(0);
+    }
+
+
+
+    public void makeMinHeap(int currentIndex)
+    {
+        if (size <= 1)
+        {
+            return;
+        }
+
+        int leftChild = getLeftChild(currentIndex);
+        int rightChild = getRightChild(currentIndex);
+
+        int minimumIndex = currentIndex;
+
+        if (leftChild < size && heap[leftChild] < heap[currentIndex])
+        {
+            minimumIndex = leftChild;
+        }
+
+        if (rightChild < size && heap[rightChild] < heap[minimumIndex])
+        {
+            minimumIndex = rightChild;
+        }
+
+        if (minimumIndex != currentIndex)
+        {
+            swap(currentIndex, minimumIndex);
+            makeMinHeap(minimumIndex);
+        }
+    }
+
+
+
     public void printHeap()
     {
         System.out.println();
@@ -135,7 +187,9 @@ public class Main
         heap.insert(10);
         heap.insert(8);
         heap.insert(20);
+        heap.delete(0);
          */
+
 
         heap.insert(3);
         heap.insert(1);
@@ -143,6 +197,8 @@ public class Main
         heap.insert(5);
         heap.insert(2);
         heap.insert(4);
+        heap.delete(4);
+
 
         heap.printHeap();
     }
