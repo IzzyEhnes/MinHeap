@@ -8,7 +8,7 @@ class MinHeap
 
     public MinHeap(int inMaxSize)
     {
-        this.heap = new int[inMaxSize + 1];
+        this.heap = new int[inMaxSize];
         this.size = 0;
         this.maxSize = inMaxSize;
     }
@@ -59,21 +59,21 @@ class MinHeap
 
     private int getParent(int currentIndex)
     {
-        return (currentIndex / 2);
+        return ((currentIndex - 1) / 2);
     }
 
 
 
     private int getLeftChild(int currentIndex)
     {
-        return (currentIndex * 2);
+        return ((currentIndex * 2) + 1);
     }
 
 
 
     private int getRightChild(int currentIndex)
     {
-        return ((currentIndex * 2) + 1);
+        return ((currentIndex * 2) + 2);
     }
 
 
@@ -96,9 +96,9 @@ class MinHeap
         }
 
         size++;
-        heap[size] = inElement;
+        heap[size - 1] = inElement;
 
-        int currentIndex = size;
+        int currentIndex = size - 1;
 
         while (currentIndex > 0 && heap[getParent(currentIndex)] > heap[currentIndex])
         {
@@ -128,12 +128,22 @@ public class Main
     {
         MinHeap heap = new MinHeap(6);
 
+        /*
         heap.insert(12);
         heap.insert(7);
         heap.insert(6);
         heap.insert(10);
         heap.insert(8);
         heap.insert(20);
+         */
+
+        heap.insert(3);
+        heap.insert(1);
+        heap.insert(6);
+        heap.insert(5);
+        heap.insert(2);
+        heap.insert(4);
+
         heap.printHeap();
     }
 }
