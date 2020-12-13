@@ -186,7 +186,7 @@ class MinHeap
 
 
 
-public class Main
+class Driver
 {
     public static MinHeap readFile(String fileName)
     {
