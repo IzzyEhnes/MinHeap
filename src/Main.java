@@ -165,7 +165,7 @@ class MinHeap
     {
         System.out.println();
 
-        for (int i = 0; i < heap.length; i++)
+        for (int i = 0; i < size; i++)
         {
             System.out.println(heap[i]);
         }
@@ -198,6 +198,8 @@ public class Main
         heap.insert(2);
         heap.insert(4);
         heap.delete(4);
+        heap.insert(3);
+        heap.delete(0);
 
 
         heap.printHeap();
