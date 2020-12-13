@@ -232,7 +232,7 @@ class Driver
 
     public static void main(String[] args)
     {
-        MinHeap heap = new MinHeap(9);
+        MinHeap heap;
 
         heap = readFile("src/input.txt");
 
