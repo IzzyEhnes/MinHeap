@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 class MinHeap
 {
     private int[] heap;
@@ -111,6 +116,13 @@ class MinHeap
 
     public void delete(int inIndex)
     {
+        if (inIndex > size - 1)
+        {
+            System.out.println("\nInvalid index - element could not be deleted");
+
+            return;
+        }
+
         heap[inIndex] = heap[0];
         int currentIndex = inIndex;
 
@@ -176,32 +188,63 @@ class MinHeap
 
 public class Main
 {
+    public static MinHeap readFile(String fileName)
+    {
+        Scanner fileReader = null;
+
+        try
+        {
+            fileReader = new Scanner(new File(fileName));
+        }
+
+        catch (FileNotFoundException fileError)
+        {
+            System.out.println(String.format
+                    ("There was a problem opening file \"%s\": \n\tError = %s", fileName, fileError.getMessage()));
+
+            System.out.println("Exiting program...");
+
+            System.exit(1);
+        }
+
+        ArrayList<Integer> temp = new ArrayList<>();
+
+        while (fileReader.hasNext())
+        {
+            int num = fileReader.nextInt();
+
+            temp.add(num);;
+        }
+
+        MinHeap heap = new MinHeap(temp.size());
+
+        for (int num : temp)
+        {
+            heap.insert(num);
+        }
+
+        fileReader.close();
+
+        return heap;
+    }
+
+
+
     public static void main(String[] args)
     {
         MinHeap heap = new MinHeap(6);
 
-        /*
-        heap.insert(12);
-        heap.insert(7);
-        heap.insert(6);
-        heap.insert(10);
-        heap.insert(8);
-        heap.insert(20);
+        heap = readFile("src/input.txt");
+
+        heap.delete(2);
+        heap.printHeap();
         heap.delete(0);
-         */
-
-
-        heap.insert(3);
-        heap.insert(1);
-        heap.insert(6);
-        heap.insert(5);
-        heap.insert(2);
-        heap.insert(4);
+        heap.printHeap();
         heap.delete(4);
-        heap.insert(3);
+        heap.printHeap();
         heap.delete(0);
-
-
+        heap.printHeap();
+        heap.delete(1);
         heap.printHeap();
     }
 }
